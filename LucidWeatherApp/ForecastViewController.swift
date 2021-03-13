@@ -7,16 +7,17 @@
 
 import UIKit
 
-class ForecastViewController: UIViewController {
+
+class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     
-    
+
     let cities = [
-        "Rijeka",
-        "Zagreb",
-        "London",
-        "Chicago"
+        "rijeka",
+        "zagreb",
+        "london",
+        "chicago"
     ]
     
     override func viewDidLoad() {
@@ -26,16 +27,20 @@ class ForecastViewController: UIViewController {
         tableView.dataSource = self
     }
     
-
-}
-
-extension ForecastViewController: UITableViewDelegate{
+//  UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You chose \(indexPath.row)")
+        //print("You chose \(indexPath.row)")
+        // Prenesi u ShowWeatherViewController
+        let showWeather = ShowWeatherViewController()
+        
+        showWeather.city = cities[indexPath.row].lowercased()
+        
+        print("You chose \(indexPath.row) with value \(String(showWeather.city!))")
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-extension ForecastViewController: UITableViewDataSource{
+    
+//  UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
@@ -43,9 +48,29 @@ extension ForecastViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = cities[indexPath.row]
+        cell.textLabel?.text = cities[indexPath.row].uppercased()
         
         return cell
     }
 }
+//
+//extension ForecastViewController: UITableViewDelegate{
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("You chose \(indexPath.row)")
+//    }
+//}
+//
+//extension ForecastViewController: UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return cities.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//
+//        cell.textLabel?.text = cities[indexPath.row]
+//
+//        return cell
+//    }
+//}
 

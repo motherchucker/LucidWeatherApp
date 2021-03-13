@@ -7,23 +7,23 @@
 
 import UIKit
 
+
+
 class ShowWeatherViewController: UIViewController {
+    
+//  MORAM:
+//  - dohvatiti odabranu vrijednost, odnosno grad i sukladno s time povuci podatke iz modela za vrijeme za taj grad
+//  1. URLSession otvoriti za api stranicu u kojoj prosljedujemo vrijednost grada
+//  2. Nakon ostvarene veze dohvatiti i prikazati trazene podatke za taj grad
+//  3. Stvoriti gumb "Spremi", i na pritisak gumba spremiti podatke u Model, iz kojeg se onda sprema u DataCore
+    
+    var city : String!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.navigationItem.title = city
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
