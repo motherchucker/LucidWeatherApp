@@ -1,22 +1,18 @@
 //
-//  ForecastSecondViewController.swift
+//  ShowWeatherViewController.swift
 //  LucidWeatherApp
 //
-//  Created by mrsic on 12/03/2021.
+//  Created by mrsic on 13/03/2021.
 //
 
 import UIKit
 
-protocol CityDelegate {
-    func getCity(city: String)
-}
-
-class ShowForecastViewController: UIViewController, CityDelegate{
+class ShowWeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    
+        // Do any additional setup after loading the view.
     }
     
 

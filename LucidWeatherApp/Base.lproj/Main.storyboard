@@ -50,7 +50,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cM2-wD-5IC" kind="show" id="LEC-ND-Msm"/>
+                                            <segue destination="JKq-DY-vTz" kind="show" id="Kzc-Ty-lGg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -84,21 +84,21 @@
             </objects>
             <point key="canvasLocation" x="31.884057971014496" y="318.75"/>
         </scene>
-        <!--Show Forecast View Controller-->
-        <scene sceneID="UYl-3P-W9x">
+        <!--ShowWeather-->
+        <scene sceneID="jsC-ut-315">
             <objects>
-                <viewController id="cM2-wD-5IC" customClass="ShowForecastViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aJs-p7-YnZ">
+                <viewController title="ShowWeather" id="JKq-DY-vTz" customClass="ShowWeatherViewController" customModule="LucidWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IIc-hZ-ddx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="XcO-jX-knA"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                        <viewLayoutGuide key="safeArea" id="Je2-FO-nNY"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mrw-aT-wml"/>
+                    <navigationItem key="navigationItem" id="1fp-pl-R3n"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g2Y-YV-0lJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hiF-MK-TE2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="319"/>
+            <point key="canvasLocation" x="851" y="326"/>
         </scene>
         <!--History-->
         <scene sceneID="U9F-if-rWc">
@@ -142,9 +142,6 @@
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
