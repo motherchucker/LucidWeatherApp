@@ -17,13 +17,15 @@ class ShowWeatherViewController: UIViewController {
 //  2. Nakon ostvarene veze dohvatiti i prikazati trazene podatke za taj grad
 //  3. Stvoriti gumb "Spremi", i na pritisak gumba spremiti podatke u Model, iz kojeg se onda sprema u DataCore
     
-    var city : String!
+    var cities = ""
     
-
+    @IBOutlet weak var weatherName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = city
+        self.navigationItem.title = "\(cities)"
+        weatherName.text = "\(cities)"
     }
 }
 

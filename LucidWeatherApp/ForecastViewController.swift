@@ -31,11 +31,11 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("You chose \(indexPath.row)")
         // Prenesi u ShowWeatherViewController
-        let showWeather = ShowWeatherViewController()
+        let showWeather = storyboard?.instantiateViewController(withIdentifier: "ShowWeatherViewController") as? ShowWeatherViewController
+        showWeather?.cities = cities[indexPath.row].lowercased()
+        self.navigationController?.pushViewController(showWeather!, animated: true)
         
-        showWeather.city = cities[indexPath.row].lowercased()
-        
-        print("You chose \(indexPath.row) with value \(String(showWeather.city!))")
+        print("You chose \(indexPath.row) with value \(String(cities[indexPath.row].lowercased()))")
         
         tableView.deselectRow(at: indexPath, animated: true)
     }

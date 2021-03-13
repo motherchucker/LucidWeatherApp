@@ -49,9 +49,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="JKq-DY-vTz" kind="show" id="Kzc-Ty-lGg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -87,20 +84,36 @@
         <!--ShowWeather-->
         <scene sceneID="jsC-ut-315">
             <objects>
-                <viewController title="ShowWeather" id="JKq-DY-vTz" customClass="ShowWeatherViewController" customModule="LucidWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowWeatherViewController" title="ShowWeather" id="JKq-DY-vTz" customClass="ShowWeatherViewController" customModule="LucidWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IIc-hZ-ddx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM1-1C-bpM">
+                                <rect key="frame" x="186" y="178" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Je2-FO-nNY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="mM1-1C-bpM" firstAttribute="centerX" secondItem="IIc-hZ-ddx" secondAttribute="centerX" id="3Zs-zD-AQq"/>
+                            <constraint firstItem="mM1-1C-bpM" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="186" id="GK4-N2-bvt"/>
+                            <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="mM1-1C-bpM" secondAttribute="trailing" constant="186" id="N5R-rT-10W"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1fp-pl-R3n">
+                    <navigationItem key="navigationItem" title="Title" id="1fp-pl-R3n">
                         <barButtonItem key="backBarButtonItem" title="&quot; &quot;" id="0tn-L2-2yV"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="weatherName" destination="mM1-1C-bpM" id="d7B-gH-h4e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiF-MK-TE2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="851" y="326"/>
+            <point key="canvasLocation" x="850.72463768115949" y="325.44642857142856"/>
         </scene>
         <!--History-->
         <scene sceneID="U9F-if-rWc">
@@ -131,6 +144,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="0mq-gn-fVq" kind="relationship" relationship="rootViewController" id="Fte-p0-jNI"/>
+                        <segue destination="JKq-DY-vTz" kind="show" id="lpb-Pl-h0a"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mzn-I3-i41" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
