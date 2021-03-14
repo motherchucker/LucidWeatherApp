@@ -37,10 +37,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N9d-iL-clc">
                                 <rect key="frame" x="0.0" y="163" width="414" height="516"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="414" id="cDS-TM-0un"/>
-                                    <constraint firstAttribute="height" constant="516" id="woe-I2-nK0"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="bCA-UV-ie2">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
@@ -53,7 +49,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show weather forecast for:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyq-mb-RS3">
-                                <rect key="frame" x="40" y="121.5" width="334" height="23.5"/>
+                                <rect key="frame" x="40" y="121" width="334" height="23.5"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -62,14 +58,13 @@
                         <viewLayoutGuide key="safeArea" id="z6g-xI-1Wn"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstItem="N9d-iL-clc" firstAttribute="top" secondItem="pyq-mb-RS3" secondAttribute="bottom" constant="18" id="5Qg-II-xW9"/>
-                            <constraint firstItem="pyq-mb-RS3" firstAttribute="leading" secondItem="z6g-xI-1Wn" secondAttribute="leading" constant="40" id="5rJ-7c-TeJ"/>
-                            <constraint firstItem="z6g-xI-1Wn" firstAttribute="trailing" secondItem="pyq-mb-RS3" secondAttribute="trailing" constant="40" id="Hku-eQ-Yb6"/>
-                            <constraint firstItem="z6g-xI-1Wn" firstAttribute="bottom" secondItem="N9d-iL-clc" secondAttribute="bottom" constant="134" id="Sxg-Iw-8F4"/>
-                            <constraint firstItem="N9d-iL-clc" firstAttribute="trailing" secondItem="z6g-xI-1Wn" secondAttribute="trailing" id="VZ4-Fe-u20"/>
-                            <constraint firstItem="pyq-mb-RS3" firstAttribute="centerX" secondItem="9wU-W5-NO2" secondAttribute="centerX" id="uES-Hu-94b"/>
-                            <constraint firstItem="N9d-iL-clc" firstAttribute="top" secondItem="z6g-xI-1Wn" secondAttribute="top" constant="75" id="ui0-ce-LNb"/>
-                            <constraint firstItem="N9d-iL-clc" firstAttribute="leading" secondItem="z6g-xI-1Wn" secondAttribute="leading" id="yc9-v0-A8r"/>
+                            <constraint firstItem="N9d-iL-clc" firstAttribute="leading" secondItem="z6g-xI-1Wn" secondAttribute="leading" id="NtZ-8e-L3F"/>
+                            <constraint firstItem="N9d-iL-clc" firstAttribute="top" secondItem="pyq-mb-RS3" secondAttribute="bottom" constant="18.5" id="UWw-RB-2MO"/>
+                            <constraint firstItem="pyq-mb-RS3" firstAttribute="leading" secondItem="z6g-xI-1Wn" secondAttribute="leading" constant="40" id="UlZ-K5-vyf"/>
+                            <constraint firstItem="N9d-iL-clc" firstAttribute="trailing" secondItem="z6g-xI-1Wn" secondAttribute="trailing" id="adS-Ew-Abq"/>
+                            <constraint firstItem="pyq-mb-RS3" firstAttribute="top" secondItem="z6g-xI-1Wn" secondAttribute="top" constant="33" id="bmi-4y-Bz9"/>
+                            <constraint firstItem="z6g-xI-1Wn" firstAttribute="trailing" secondItem="pyq-mb-RS3" secondAttribute="trailing" constant="40" id="lLJ-jP-ZUk"/>
+                            <constraint firstItem="z6g-xI-1Wn" firstAttribute="bottom" secondItem="N9d-iL-clc" secondAttribute="bottom" constant="134" id="uzn-Wm-use"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OzV-VD-oka"/>
