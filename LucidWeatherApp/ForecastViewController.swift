@@ -48,7 +48,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
 
         performSegue(withIdentifier: "showCity", sender: self)
         
-        // What is chosen:
+        // Log - What is chosen:
         print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].cityName!))")
         
         //tableView.deselectRow(at: indexPath, animated: true)
