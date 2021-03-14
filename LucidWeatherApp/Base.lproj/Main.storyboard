@@ -127,8 +127,20 @@
                             <constraint firstItem="Kyj-hT-wVh" firstAttribute="top" secondItem="cIg-Ih-cCW" secondAttribute="bottom" constant="8" symbolic="YES" id="zEZ-I0-eoU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="1fp-pl-R3n">
+                    <navigationItem key="navigationItem" id="1fp-pl-R3n">
+                        <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="&quot; &quot;" id="0tn-L2-2yV"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="gZ0-D0-AMK">
+                            <rect key="frame" x="172.5" y="6" width="69" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="°C"/>
+                                <segment title="°F"/>
+                            </segments>
+                            <connections>
+                                <action selector="weatherChangeSegment:" destination="JKq-DY-vTz" eventType="valueChanged" id="aSv-Nn-M2l"/>
+                            </connections>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="lblHumidity" destination="1cb-oR-7m6" id="Oaf-Dd-nDa"/>

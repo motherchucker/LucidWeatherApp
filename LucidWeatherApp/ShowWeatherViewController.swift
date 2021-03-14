@@ -20,6 +20,7 @@ class ShowWeatherViewController: UIViewController {
     var cities : Cities?
     
     var city : String = ""
+        
     
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var lblPressure: UILabel!
@@ -34,13 +35,25 @@ class ShowWeatherViewController: UIViewController {
         self.navigationItem.title = city.capitalFirstLetter()
         lblTemp.text = "\(String((cities?.cityName)!))"
 
-        getWeatherData(city: city, showTemp: lblTemp, showPressure: lblPressure, showHumidity: lblHumidity, showWind: lblWindSpeed)
+        getWeatherData(city: city, showTemp: lblTemp, showPressure: lblPressure, showHumidity: lblHumidity, showWind: lblWindSpeed, tempUnit: "metric")
     }
+    
+    @IBAction func weatherChangeSegment(_ sender: UISegmentedControl){
+        
+        if sender.selectedSegmentIndex == 0{
+            getWeatherData(city: city, showTemp: lblTemp, showPressure: lblPressure, showHumidity: lblHumidity, showWind: lblWindSpeed, tempUnit: "metric")
+        }
+        else {
+            getWeatherData(city: city, showTemp: lblTemp, showPressure: lblPressure, showHumidity: lblHumidity, showWind: lblWindSpeed, tempUnit: "imperial")
+        }
+    }
+
 }
 
 
-func getWeatherData(city: String, showTemp: UILabel, showPressure: UILabel, showHumidity : UILabel, showWind: UILabel){
-    let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=00653d2fcf04771524e3d724d11805c3")
+func getWeatherData(city: String, showTemp: UILabel, showPressure: UILabel, showHumidity : UILabel, showWind: UILabel, tempUnit: String){
+    
+    let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=00653d2fcf04771524e3d724d11805c3&units=\(tempUnit)")
     
     guard url != nil else{
         print("Error creating url object")
@@ -69,7 +82,8 @@ func getWeatherData(city: String, showTemp: UILabel, showPressure: UILabel, show
                         }
                         if let temperature = mainDictionary.value(forKey: "temp") {
                             DispatchQueue.main.async {
-                                showTemp.text = "Temperature: \(temperature) F"
+                                
+                                showTemp.text = "Temperature: \(temperature)" // °C or °F
                             }
                         }
                         if let humidity = mainDictionary.value(forKey: "humidity"){
