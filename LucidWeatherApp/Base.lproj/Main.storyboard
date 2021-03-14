@@ -109,17 +109,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdB-ke-RKD">
+                                <rect key="frame" x="25" y="296" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-yK-V1J">
+                                <rect key="frame" x="25" y="151" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Je2-FO-nNY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstItem="oUM-MI-94i" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="25" id="3L8-MD-YJt"/>
+                            <constraint firstItem="eHs-yK-V1J" firstAttribute="top" secondItem="Je2-FO-nNY" secondAttribute="top" constant="11" id="5Gd-WE-QUU"/>
                             <constraint firstItem="cIg-Ih-cCW" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="25" id="6X6-Nl-P6f"/>
+                            <constraint firstItem="ZdB-ke-RKD" firstAttribute="top" secondItem="oUM-MI-94i" secondAttribute="bottom" constant="8" id="CmP-gf-sAK"/>
+                            <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="eHs-yK-V1J" secondAttribute="trailing" constant="25" id="Nur-Fa-YCg"/>
                             <constraint firstItem="1cb-oR-7m6" firstAttribute="top" secondItem="Kyj-hT-wVh" secondAttribute="bottom" constant="8" symbolic="YES" id="NyA-S8-fFf"/>
                             <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="Kyj-hT-wVh" secondAttribute="trailing" constant="25" id="OON-lo-Fws"/>
+                            <constraint firstItem="ZdB-ke-RKD" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="25" id="Uoj-52-Nxy"/>
                             <constraint firstItem="1cb-oR-7m6" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="25" id="dzX-4S-rxe"/>
                             <constraint firstItem="oUM-MI-94i" firstAttribute="top" secondItem="1cb-oR-7m6" secondAttribute="bottom" constant="8" symbolic="YES" id="eHf-Jv-rOS"/>
+                            <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="ZdB-ke-RKD" secondAttribute="trailing" constant="25" id="gAa-bn-sJH"/>
                             <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="oUM-MI-94i" secondAttribute="trailing" constant="25" id="gqu-UJ-kwW"/>
+                            <constraint firstItem="eHs-yK-V1J" firstAttribute="leading" secondItem="Je2-FO-nNY" secondAttribute="leading" constant="25" id="l5X-wg-2Wl"/>
                             <constraint firstItem="cIg-Ih-cCW" firstAttribute="top" secondItem="Je2-FO-nNY" secondAttribute="top" constant="40" id="qCs-21-axh"/>
                             <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="cIg-Ih-cCW" secondAttribute="trailing" constant="25" id="sLI-fO-RYF"/>
                             <constraint firstItem="Je2-FO-nNY" firstAttribute="trailing" secondItem="1cb-oR-7m6" secondAttribute="trailing" constant="25" id="sMY-H2-Jj1"/>
@@ -131,7 +149,7 @@
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="&quot; &quot;" id="0tn-L2-2yV"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="gZ0-D0-AMK">
-                            <rect key="frame" x="172.5" y="6" width="69" height="33"/>
+                            <rect key="frame" x="172.5" y="5.5" width="69" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="°C"/>
@@ -143,6 +161,8 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="lblCityName" destination="eHs-yK-V1J" id="drj-gG-AKq"/>
+                        <outlet property="lblDescription" destination="ZdB-ke-RKD" id="rWI-Ca-FgE"/>
                         <outlet property="lblHumidity" destination="1cb-oR-7m6" id="Oaf-Dd-nDa"/>
                         <outlet property="lblPressure" destination="Kyj-hT-wVh" id="ZOm-au-0aM"/>
                         <outlet property="lblTemp" destination="cIg-Ih-cCW" id="n4Z-7P-1MW"/>

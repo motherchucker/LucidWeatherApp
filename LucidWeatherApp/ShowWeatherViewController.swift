@@ -34,10 +34,12 @@ class ShowWeatherViewController: UIViewController {
     var weatherDetail : WeatherDetail!
     
     
+    @IBOutlet weak var lblCityName: UILabel!
     @IBOutlet weak var lblTemp: UILabel!
     @IBOutlet weak var lblPressure: UILabel!
     @IBOutlet weak var lblHumidity: UILabel!
     @IBOutlet weak var lblWindSpeed: UILabel!
+    @IBOutlet weak var lblDescription: UILabel!
     
     
     override func viewDidLoad() {
@@ -50,10 +52,12 @@ class ShowWeatherViewController: UIViewController {
 
         weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
             DispatchQueue.main.async {
+                self.lblCityName.text = "City: \(weatherDetail.name)"
                 self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
                 self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
                 self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                 self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
+                self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
             }
         }
     }
@@ -64,30 +68,36 @@ class ShowWeatherViewController: UIViewController {
         
         weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
             DispatchQueue.main.async {
+                self.lblCityName.text = "City: \(weatherDetail.name)"
                 self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
                 self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
                 self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                 self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
+                self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
             }
         }
         
         if sender.selectedSegmentIndex == 0{
             weatherDetail.getWeatherData(city: city, tempUnit: "metric") {
                 DispatchQueue.main.async {
+                    self.lblCityName.text = "City: \(weatherDetail.name)"
                     self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
                     self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
                     self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                     self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
+                    self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
                 }
             }
         }
         else {
             weatherDetail.getWeatherData(city: city, tempUnit: "imperial") {
                 DispatchQueue.main.async {
+                    self.lblCityName.text = "City: \(weatherDetail.name)"
                     self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
                     self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
                     self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                     self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
+                    self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
                 }
             }
         }
