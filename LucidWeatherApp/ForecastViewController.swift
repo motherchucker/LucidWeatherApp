@@ -7,70 +7,72 @@
 
 import UIKit
 
+class Cities {
+    var cityName : String?
+    
+    init(cityN: String){
+        self.cityName = cityN
+    }
+}
 
 class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     
-
-    let cities = [
-        "rijeka",
-        "zagreb",
-        "london",
-        "chicago"
-    ]
-    
+    var citiesArray = [Cities]()
+//    let cities = [
+//        "rijeka",
+//        "zagreb",
+//        "london",
+//        "chicago"
+//    ]
+//
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // add cities
+        let rijeka = Cities(cityN: "rijeka")
+        citiesArray.append(rijeka)
+        let zagreb = Cities(cityN: "zagreb")
+        citiesArray.append(zagreb)
+        let london = Cities(cityN: "london")
+        citiesArray.append(london)
+        let chicago = Cities(cityN: "chicago")
+        citiesArray.append(chicago)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
 //  UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("You chose \(indexPath.row)")
-        // Prenesi u ShowWeatherViewController
-        let showWeather = storyboard?.instantiateViewController(withIdentifier: "ShowWeatherViewController") as? ShowWeatherViewController
-        showWeather?.cities = cities[indexPath.row].lowercased()
-        self.navigationController?.pushViewController(showWeather!, animated: true)
+
+        performSegue(withIdentifier: "showCity", sender: self)
         
-        print("You chose \(indexPath.row) with value \(String(cities[indexPath.row].lowercased()))")
+        // What is chosen:
+        print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].cityName!))")
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+// Seg
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ShowWeatherViewController{
+            destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+        }
     }
     
 //  UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return citiesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = cities[indexPath.row].uppercased()
+        cell.textLabel?.text = citiesArray[indexPath.row].cityName?.uppercased()
         
         return cell
     }
 }
-//
-//extension ForecastViewController: UITableViewDelegate{
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("You chose \(indexPath.row)")
-//    }
-//}
-//
-//extension ForecastViewController: UITableViewDataSource{
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return cities.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//
-//        cell.textLabel?.text = cities[indexPath.row]
-//
-//        return cell
-//    }
-//}
 
