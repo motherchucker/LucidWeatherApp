@@ -21,20 +21,25 @@ class ShowWeatherViewController: UIViewController {
     
     var city : String = ""
     
-    @IBOutlet weak var lblWeatherCity: UILabel!
+    @IBOutlet weak var lblTemp: UILabel!
+    @IBOutlet weak var lblPressure: UILabel!
+    @IBOutlet weak var lblHumidity: UILabel!
+    @IBOutlet weak var lblWindSpeed: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         city = String((cities?.cityName)!)
         self.navigationItem.title = city.capitalFirstLetter()
-        lblWeatherCity.text = "\(String((cities?.cityName)!))"
-        getWeatherData(city: city, lblWeatherCity: lblWeatherCity)
+        lblTemp.text = "\(String((cities?.cityName)!))"
+
+        getWeatherData(city: city, showTemp: lblTemp, showPressure: lblPressure, showHumidity: lblHumidity, showWind: lblWindSpeed)
     }
 }
 
 
-func getWeatherData(city: String, lblWeatherCity: UILabel){
+func getWeatherData(city: String, showTemp: UILabel, showPressure: UILabel, showHumidity : UILabel, showWind: UILabel){
     let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=00653d2fcf04771524e3d724d11805c3")
     
     guard url != nil else{
@@ -51,16 +56,37 @@ func getWeatherData(city: String, lblWeatherCity: UILabel){
             if let data = data {
                 let dataString = String(data: data, encoding: String.Encoding.utf8)
                 print("Weather Data: \(dataString!)")
+                
                 if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as?
                     NSDictionary{
+                    
+                    //temp, humidity, pressure
                     if let mainDictionary = jsonObj.value(forKey: "main") as? NSDictionary{
+                        if let pressure = mainDictionary.value(forKey: "pressure"){
+                            DispatchQueue.main.async {
+                                showPressure.text = "Pressure: \(pressure)"
+                            }
+                        }
                         if let temperature = mainDictionary.value(forKey: "temp") {
                             DispatchQueue.main.async {
-                                lblWeatherCity.text = "Temperature: \(temperature) F"
+                                showTemp.text = "Temperature: \(temperature) F"
+                            }
+                        }
+                        if let humidity = mainDictionary.value(forKey: "humidity"){
+                            DispatchQueue.main.async {
+                                showHumidity.text = "Humidity: \(humidity)"
                             }
                         }
                     } else {
-                        print("Error: unable to find temperature in dictionary")
+                        print("Error: unable to find temperature, pressure and humidity in dictionary")
+                    }
+                    // wind
+                    if let windDictionary = jsonObj.value(forKey: "wind") as? NSDictionary{
+                        if let speed = windDictionary.value(forKey: "speed"){
+                            DispatchQueue.main.async {
+                                showWind.text = "Wind speed: \(speed)"
+                            }
+                        }
                     }
                 } else {
                     print("Error: unable to convert json data")
