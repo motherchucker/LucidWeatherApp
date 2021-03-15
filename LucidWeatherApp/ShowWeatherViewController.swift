@@ -10,28 +10,15 @@ import UIKit
 
 class ShowWeatherViewController: UIViewController {
     
-//  MORAM:
-//  - dohvatiti odabranu vrijednost, odnosno grad i sukladno s time povuci podatke iz modela za vrijeme za taj grad
-//  1. URLSession otvoriti za api stranicu u kojoj prosljedujemo vrijednost grada
-//  2. Nakon ostvarene veze dohvatiti i prikazati trazene podatke za taj grad
 //  3. Stvoriti gumb "Spremi", i na pritisak gumba spremiti podatke u Model, iz kojeg se onda sprema u DataCore
     
     var cities : Cities?
-    
-//    class WeatherData{
-//        var city : String
-//        var tempUnit: String
-//
-//        init(city: String, tempUnit: String) {
-//            self.city = city
-//            self.tempUnit = tempUnit
-//        }
-//
-//    }
     var city : String = ""
     var tempUnit: String = ""
 //
     var weatherDetail : WeatherDetail!
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
     @IBOutlet weak var lblCityName: UILabel!
@@ -58,8 +45,18 @@ class ShowWeatherViewController: UIViewController {
                 self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                 self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
                 self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
+                
+                //create object
+                let newCityData = CityWeather(context: self.context)
+                newCityData.cityName = weatherDetail.name
+                newCityData.temp = weatherDetail.temp
+                newCityData.pressure = Int64(weatherDetail.pressure)
+                newCityData.humidity = Int64(weatherDetail.humidity)
+                newCityData.windSpeed = weatherDetail.speed
+                newCityData.weatherDescription = weatherDetail.descript
             }
         }
+
     }
     
     @IBAction func weatherChangeSegment(_ sender: UISegmentedControl){
@@ -102,7 +99,18 @@ class ShowWeatherViewController: UIViewController {
             }
         }
     }
+// Save data button
 
+        @IBAction func btnSaveData(_ sender: Any) {
+        //save
+        do{
+            try self.context.save()}
+        catch{
+            print("Error with saving data")
+        }
+    }
+    
+    
 }
 
 extension String{
