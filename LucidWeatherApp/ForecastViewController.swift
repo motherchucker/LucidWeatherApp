@@ -20,13 +20,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView: UITableView!
     
     var citiesArray = [Cities]()
-//    let cities = [
-//        "rijeka",
-//        "zagreb",
-//        "london",
-//        "chicago"
-//    ]
-//
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +33,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
         citiesArray.append(london)
         let chicago = Cities(cityN: "chicago")
         citiesArray.append(chicago)
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -51,10 +46,9 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
         // Log - What is chosen:
         print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].cityName!))")
         
-        //tableView.deselectRow(at: indexPath, animated: true)
     }
     
-// Seg
+// Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShowWeatherViewController{
             destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]

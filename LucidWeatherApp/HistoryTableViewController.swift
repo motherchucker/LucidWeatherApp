@@ -32,11 +32,20 @@ class HistoryTableViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 self.tableViewHistory.reloadData()
+                // check
+                print("Data reloaded inside fetch")
             }
         }
         catch{
             print("Error while fetching data")
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // check
+        print("Data reloaded tab")
+        fetchForecast()
     }
 
     // MARK: - Table view data source

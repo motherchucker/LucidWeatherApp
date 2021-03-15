@@ -46,33 +46,14 @@ class ShowWeatherViewController: UIViewController {
                 self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
                 self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
                 
-                //create object
-                let newCityData = CityWeather(context: self.context)
-                newCityData.cityName = weatherDetail.name
-                newCityData.temp = weatherDetail.temp
-                newCityData.pressure = Int64(weatherDetail.pressure)
-                newCityData.humidity = Int64(weatherDetail.humidity)
-                newCityData.windSpeed = weatherDetail.speed
-                newCityData.weatherDescription = weatherDetail.descript
             }
         }
-
     }
+    
     
     @IBAction func weatherChangeSegment(_ sender: UISegmentedControl){
         
         let weatherDetail = WeatherDetail()
-        
-        weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
-            DispatchQueue.main.async {
-                self.lblCityName.text = "City: \(weatherDetail.name)"
-                self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
-                self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
-                self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
-                self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
-                self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
-            }
-        }
         
         if sender.selectedSegmentIndex == 0{
             weatherDetail.getWeatherData(city: city, tempUnit: "metric") {
@@ -101,16 +82,31 @@ class ShowWeatherViewController: UIViewController {
     }
 // Save data button
 
-        @IBAction func btnSaveData(_ sender: Any) {
+    @IBAction func btnSaveData(_ sender: Any) {
         //save
-        do{
-            try self.context.save()}
-        catch{
-            print("Error with saving data")
+        let weatherDetail = WeatherDetail()
+
+        weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
+            DispatchQueue.main.async {
+                let newCityData = CityWeather(context: self.context)
+                newCityData.cityName = weatherDetail.name
+                newCityData.temp = weatherDetail.temp
+                newCityData.pressure = Int64(weatherDetail.pressure)
+                newCityData.humidity = Int64(weatherDetail.humidity)
+                newCityData.windSpeed = weatherDetail.speed
+                newCityData.weatherDescription = weatherDetail.descript
+                
+                do{
+                    try self.context.save()
+                    // check
+                    print("Data saved")
+                }
+                catch{
+                    print("Error with saving data")
+                }
+            }
         }
     }
-    
-    
 }
 
 extension String{
