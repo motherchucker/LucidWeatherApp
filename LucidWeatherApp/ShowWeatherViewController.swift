@@ -89,6 +89,7 @@ class ShowWeatherViewController: UIViewController {
         weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
             DispatchQueue.main.async {
                 let newCityData = CityWeather(context: self.context)
+                newCityData.date = NSDate(timeIntervalSince1970: weatherDetail.dateSaved) as Date
                 newCityData.cityName = weatherDetail.name
                 newCityData.temp = weatherDetail.temp
                 newCityData.pressure = Int64(weatherDetail.pressure)

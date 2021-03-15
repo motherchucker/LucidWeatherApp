@@ -11,6 +11,7 @@ class WeatherDetail: ShowWeatherViewController{
     
     struct Result: Codable {
         var name: String
+        var dt: Double
         var weather: [Weather]
         var main: Main
         var wind: Wind
@@ -28,6 +29,7 @@ class WeatherDetail: ShowWeatherViewController{
     }
     
     
+    var dateSaved = 0.0
     var name = ""
     var temp = 0.0
     var pressure = 0
@@ -58,6 +60,7 @@ class WeatherDetail: ShowWeatherViewController{
             
             do {
                 let result = try JSONDecoder().decode(Result.self, from: data!)
+                self.dateSaved = result.dt
                 self.name = result.name
                 self.temp = result.main.temp
                 self.pressure = Int(result.main.pressure.rounded())

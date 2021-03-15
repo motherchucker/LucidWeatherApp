@@ -61,7 +61,13 @@ class HistoryTableViewController: UITableViewController {
         cell.textLabel?.text = "Test"
         
         let weather = self.savedWeather![indexPath.row]
-        cell.textLabel?.text = "\(weather.cityName!) temp: \(weather.temp)"
+        
+        let formattedDate = DateFormatter()
+        formattedDate.dateStyle = .medium
+        formattedDate.timeStyle = .none
+        formattedDate.locale = Locale(identifier: "hr")
+        
+        cell.textLabel?.text = "\(formattedDate.string(from: weather.date!))\t\(weather.cityName!)\t\(weather.temp)°C"
         return cell
     }
     
