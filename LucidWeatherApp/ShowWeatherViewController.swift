@@ -33,8 +33,7 @@ class ShowWeatherViewController: UIViewController {
         if cities?.cityName != nil{
             city = String((cities?.cityName)!)
         }
-        
-        //city = String((cities?.cityName)!)
+
         self.navigationItem.title = city.capitalFirstLetter()
         tempUnit = "metric"
         let weatherDetail = WeatherDetail()
@@ -47,7 +46,6 @@ class ShowWeatherViewController: UIViewController {
                 self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
                 self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
                 self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
-                
             }
         }
     }
@@ -98,7 +96,6 @@ class ShowWeatherViewController: UIViewController {
                 newCityData.humidity = Int64(weatherDetail.humidity)
                 newCityData.windSpeed = weatherDetail.speed
                 newCityData.weatherDescription = weatherDetail.descript
-                
                 do{
                     try self.context.save()
                     // check

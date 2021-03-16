@@ -23,10 +23,15 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     var citiesArray = [Cities]()
     var locationManager: CLLocationManager!
     var cityName = ""
+    var clickedRow = false
 
     
     @IBAction func btnGetLocation(_ sender: Any) {
+        clickedRow = false
         getLocation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.performSegue(withIdentifier: "showCity", sender: self)
+        }
     }
     
     override func viewDidLoad() {
@@ -48,7 +53,8 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     
 //  UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        clickedRow = true
         performSegue(withIdentifier: "showCity", sender: self)
         
         // Log - What is chosen:
@@ -60,11 +66,13 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShowWeatherViewController{
             if segue.identifier == "showCity"{
-                destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]
-                tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
-            }
-            if segue.identifier == "showCurrentLocationCity"{
-                destination.city = cityName
+                if(clickedRow){
+                    destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]
+                    tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+                }
+                else {
+                    destination.city = cityName
+                }
             }
         }
     }
@@ -76,7 +84,6 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         cell.textLabel?.text = citiesArray[indexPath.row].cityName?.uppercased()
         
         return cell

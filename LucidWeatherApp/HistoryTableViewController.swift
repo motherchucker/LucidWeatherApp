@@ -53,7 +53,6 @@ class HistoryTableViewController: UITableViewController {
         fetchForecast()
     }
 
-    
     // MARK: - Table view data source
 
 
