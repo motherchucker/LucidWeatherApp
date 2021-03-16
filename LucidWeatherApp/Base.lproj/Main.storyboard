@@ -19,7 +19,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="a4V-uu-BXC" kind="relationship" relationship="viewControllers" id="v37-Xy-mSL"/>
-                        <segue destination="XVl-3d-sgx" kind="relationship" relationship="viewControllers" id="IoD-5V-O5w"/>
+                        <segue destination="apW-OX-yo5" kind="relationship" relationship="viewControllers" id="IoD-5V-O5w"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9R-dG-Vpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -78,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToB-30-3Uk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31.884057971014496" y="318.75"/>
+            <point key="canvasLocation" x="942.02898550724649" y="318.75"/>
         </scene>
         <!--ShowWeather-->
         <scene sceneID="jsC-ut-315">
@@ -189,9 +189,104 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hiF-MK-TE2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="850.72463768115949" y="325.44642857142856"/>
+            <point key="canvasLocation" x="1760.8695652173915" y="325.44642857142856"/>
         </scene>
-        <!--History-->
+        <!--Show Forecast View Controller-->
+        <scene sceneID="vgz-en-pgR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="egc-RZ-kyQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ShowForecastViewController" id="Dia-Xf-YQm" customClass="ShowForecastViewController" customModule="LucidWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wLc-1m-g0F"/>
+                        <viewControllerLayoutGuide type="bottom" id="wMV-kH-QAU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JlS-nA-83s">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHa-KC-MFX">
+                                <rect key="frame" x="25" y="302" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieH-ld-neh">
+                                <rect key="frame" x="25" y="273" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-vS-f23">
+                                <rect key="frame" x="25" y="331" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXL-QH-5iz">
+                                <rect key="frame" x="25" y="244" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF2-1F-HMY">
+                                <rect key="frame" x="25" y="360" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu9-8Q-KnG">
+                                <rect key="frame" x="25" y="389" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fb-eH-1eu">
+                                <rect key="frame" x="25" y="215" width="364" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Xu9-8Q-KnG" firstAttribute="top" secondItem="bF2-1F-HMY" secondAttribute="bottom" constant="8" id="0SQ-8g-5yR"/>
+                            <constraint firstItem="5fb-eH-1eu" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="0dH-HV-kij"/>
+                            <constraint firstAttribute="trailing" secondItem="ieH-ld-neh" secondAttribute="trailing" constant="25" id="49y-ky-AyA"/>
+                            <constraint firstAttribute="trailing" secondItem="SXL-QH-5iz" secondAttribute="trailing" constant="25" id="4HU-ag-H6k"/>
+                            <constraint firstItem="Xu9-8Q-KnG" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="5KM-wr-EUg"/>
+                            <constraint firstAttribute="trailing" secondItem="5fb-eH-1eu" secondAttribute="trailing" constant="25" id="5af-ix-lZh"/>
+                            <constraint firstItem="Vs1-vS-f23" firstAttribute="top" secondItem="iHa-KC-MFX" secondAttribute="bottom" constant="8" id="GGG-HO-6Tj"/>
+                            <constraint firstItem="ieH-ld-neh" firstAttribute="top" secondItem="SXL-QH-5iz" secondAttribute="bottom" constant="8" id="Gp4-vo-GOk"/>
+                            <constraint firstItem="SXL-QH-5iz" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="Hyj-Zc-kbc"/>
+                            <constraint firstAttribute="trailing" secondItem="Xu9-8Q-KnG" secondAttribute="trailing" constant="25" id="ROX-bd-NlI"/>
+                            <constraint firstItem="iHa-KC-MFX" firstAttribute="top" secondItem="ieH-ld-neh" secondAttribute="bottom" constant="8" id="TnK-55-T1o"/>
+                            <constraint firstItem="SXL-QH-5iz" firstAttribute="top" secondItem="5fb-eH-1eu" secondAttribute="bottom" constant="8" id="XUo-cm-LkK"/>
+                            <constraint firstAttribute="trailing" secondItem="iHa-KC-MFX" secondAttribute="trailing" constant="25" id="Ykx-ev-NI6"/>
+                            <constraint firstItem="bF2-1F-HMY" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="b7H-74-UIC"/>
+                            <constraint firstItem="Vs1-vS-f23" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="by9-dE-cXh"/>
+                            <constraint firstAttribute="trailing" secondItem="Vs1-vS-f23" secondAttribute="trailing" constant="25" id="kUH-cr-piT"/>
+                            <constraint firstAttribute="trailing" secondItem="bF2-1F-HMY" secondAttribute="trailing" constant="25" id="mGW-QN-nGU"/>
+                            <constraint firstItem="iHa-KC-MFX" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="rdw-r0-1qd"/>
+                            <constraint firstItem="bF2-1F-HMY" firstAttribute="top" secondItem="Vs1-vS-f23" secondAttribute="bottom" constant="8" id="t92-Rl-Gkd"/>
+                            <constraint firstItem="ieH-ld-neh" firstAttribute="leading" secondItem="JlS-nA-83s" secondAttribute="leading" constant="25" id="xSh-yf-UQa"/>
+                            <constraint firstItem="5fb-eH-1eu" firstAttribute="top" secondItem="wLc-1m-g0F" secondAttribute="bottom" constant="171" id="y79-It-5wN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XXF-j1-GlN"/>
+                    <connections>
+                        <outlet property="lblCityName" destination="SXL-QH-5iz" id="CYB-cm-pD5"/>
+                        <outlet property="lblDate" destination="5fb-eH-1eu" id="bFU-Qo-214"/>
+                        <outlet property="lblDescription" destination="Xu9-8Q-KnG" id="bp4-5L-Qyu"/>
+                        <outlet property="lblHumidity" destination="Vs1-vS-f23" id="d30-jh-T9J"/>
+                        <outlet property="lblPressure" destination="iHa-KC-MFX" id="0Ow-Be-mBT"/>
+                        <outlet property="lblTemp" destination="ieH-ld-neh" id="XA6-Zr-aZU"/>
+                        <outlet property="lblWindSpeed" destination="bF2-1F-HMY" id="NVR-ga-2js"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="488" y="1054"/>
+        </scene>
+        <!--History Table View Controller-->
         <scene sceneID="jq5-YK-GzL">
             <objects>
                 <tableViewController id="XVl-3d-sgx" customClass="HistoryTableViewController" customModule="LucidWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -214,7 +309,6 @@
                             <outlet property="delegate" destination="XVl-3d-sgx" id="OSx-bp-Mnf"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="History" id="uVr-tQ-q9h"/>
                     <navigationItem key="navigationItem" id="EeR-gL-iW1"/>
                     <connections>
                         <outlet property="tableView" destination="YTX-fj-mQe" id="TgW-2w-VM7"/>
@@ -223,7 +317,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWx-da-WIx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="325"/>
+            <point key="canvasLocation" x="26.086956521739133" y="324.77678571428572"/>
         </scene>
         <!--Forecast-->
         <scene sceneID="4t0-YQ-jNn">
@@ -244,8 +338,30 @@
             </objects>
             <point key="canvasLocation" x="33" y="-408"/>
         </scene>
+        <!--History-->
+        <scene sceneID="6Gs-sk-ug2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="apW-OX-yo5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="History" id="uVr-tQ-q9h"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fbJ-QL-zIY">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XVl-3d-sgx" kind="relationship" relationship="rootViewController" id="p61-vv-PpQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VcY-if-PiD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-884.05797101449286" y="324.77678571428572"/>
+        </scene>
     </scenes>
     <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

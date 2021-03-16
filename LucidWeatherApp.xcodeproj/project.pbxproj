@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		425F5D5925FE398600BCA7FF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425F5D5825FE398600BCA7FF /* WeatherModel.swift */; };
 		425F5D6E25FED3B900BCA7FF /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425F5D6D25FED3B900BCA7FF /* HistoryTableViewController.swift */; };
+		425F9AC4260017E100BBE31D /* ShowForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425F9AC3260017E100BBE31D /* ShowForecastViewController.swift */; };
 		429CC81725FBCF5500C77D9D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CC81625FBCF5500C77D9D /* AppDelegate.swift */; };
 		429CC81925FBCF5500C77D9D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429CC81825FBCF5500C77D9D /* SceneDelegate.swift */; };
 		429CC81E25FBCF5500C77D9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 429CC81C25FBCF5500C77D9D /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		425F5D5825FE398600BCA7FF /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		425F5D6D25FED3B900BCA7FF /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		425F9AC3260017E100BBE31D /* ShowForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowForecastViewController.swift; sourceTree = "<group>"; };
 		429CC81325FBCF5500C77D9D /* LucidWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LucidWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		429CC81625FBCF5500C77D9D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		429CC81825FBCF5500C77D9D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				429EBB3325FC47260094CE76 /* ShowWeatherViewController.swift */,
 				425F5D5825FE398600BCA7FF /* WeatherModel.swift */,
 				425F5D6D25FED3B900BCA7FF /* HistoryTableViewController.swift */,
+				425F9AC3260017E100BBE31D /* ShowForecastViewController.swift */,
 				429CC82225FBCF5D00C77D9D /* Assets.xcassets */,
 				429CC82425FBCF5D00C77D9D /* LaunchScreen.storyboard */,
 				429CC82725FBCF5D00C77D9D /* Info.plist */,
@@ -153,6 +156,7 @@
 				429CC81725FBCF5500C77D9D /* AppDelegate.swift in Sources */,
 				429CC82F25FBDA1F00C77D9D /* ForecastViewController.swift in Sources */,
 				429CC82125FBCF5500C77D9D /* LucidWeatherApp.xcdatamodeld in Sources */,
+				425F9AC4260017E100BBE31D /* ShowForecastViewController.swift in Sources */,
 				429CC81925FBCF5500C77D9D /* SceneDelegate.swift in Sources */,
 				429EBB3425FC47260094CE76 /* ShowWeatherViewController.swift in Sources */,
 				425F5D5925FE398600BCA7FF /* WeatherModel.swift in Sources */,

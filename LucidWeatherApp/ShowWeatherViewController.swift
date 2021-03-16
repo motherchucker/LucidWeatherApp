@@ -10,8 +10,6 @@ import UIKit
 
 class ShowWeatherViewController: UIViewController {
     
-//  3. Stvoriti gumb "Spremi", i na pritisak gumba spremiti podatke u Model, iz kojeg se onda sprema u DataCore
-    
     var cities : Cities?
     var city : String = ""
     var tempUnit: String = ""
