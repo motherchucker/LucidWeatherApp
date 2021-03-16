@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class Cities {
     var cityName : String?
@@ -20,7 +21,14 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var tableView: UITableView!
     
     var citiesArray = [Cities]()
+    var locationManager: CLLocationManager!
+    var cityName = ""
 
+    
+    @IBAction func btnGetLocation(_ sender: Any) {
+        getLocation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +59,13 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
 // Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShowWeatherViewController{
-            destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]
-            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+            if segue.identifier == "showCity"{
+                destination.cities = citiesArray[(tableView.indexPathForSelectedRow?.row)!]
+                tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+            }
+            if segue.identifier == "showCurrentLocationCity"{
+                destination.city = cityName
+            }
         }
     }
     
@@ -70,3 +83,73 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
+// location
+extension ForecastViewController : CLLocationManagerDelegate{
+    func getLocation(){
+        // Creating a CLLocationManager will automatically check authorization
+        DispatchQueue.main.async {
+            
+            self.locationManager = CLLocationManager()
+            self.locationManager.delegate = self
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("Checking authentication status.")
+        handleAuthenticalStatus(status: status)
+    }
+    
+    func handleAuthenticalStatus(status: CLAuthorizationStatus){
+        switch status{
+        
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            oneButtonAlert(title: "Location services denied", message: "It may be that parental controls are restricting location use in this app.")
+        case .denied:
+            break
+        case .authorizedAlways:
+            locationManager.requestLocation()
+        case .authorizedWhenInUse:
+            locationManager.requestLocation()
+        @unknown default:
+            print("Unknown case of status in handleAuthenticalStatus\(status)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Deal with change in location
+        let currentLocation = locations.last ?? CLLocation()
+        print("Current location is \(currentLocation.coordinate.latitude), \(currentLocation.coordinate.latitude)")
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(currentLocation) { (placemarks, error) in
+            var locationCityName = ""
+            if placemarks != nil{
+                //get the first placemark
+                let placemark = placemarks?.last
+                // assign placemark to locationCityName
+                locationCityName = placemark?.locality ?? "City Unknown"
+            } else {
+                print("Error retrieving location. Error code: \(error?.localizedDescription)")
+                locationCityName = "Coludn't find location"
+            }
+            print("Location City: \(locationCityName)")
+            self.cityName = locationCityName
+            
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Deal with error
+    }
+}
+
+
+extension UIViewController {
+    func oneButtonAlert(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}

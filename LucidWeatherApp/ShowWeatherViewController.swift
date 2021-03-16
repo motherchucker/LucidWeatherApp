@@ -15,7 +15,7 @@ class ShowWeatherViewController: UIViewController {
     var tempUnit: String = ""
 //
     var weatherDetail : WeatherDetail!
-    
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
@@ -30,7 +30,11 @@ class ShowWeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        city = String((cities?.cityName)!)
+        if cities?.cityName != nil{
+            city = String((cities?.cityName)!)
+        }
+        
+        //city = String((cities?.cityName)!)
         self.navigationItem.title = city.capitalFirstLetter()
         tempUnit = "metric"
         let weatherDetail = WeatherDetail()
@@ -117,3 +121,6 @@ extension String{
         self = self.capitalFirstLetter()
     }
 }
+
+
+
