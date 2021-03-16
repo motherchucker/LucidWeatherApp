@@ -96,7 +96,6 @@ extension ForecastViewController : CLLocationManagerDelegate{
         // Creating a CLLocationManager will automatically check authorization
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
-
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

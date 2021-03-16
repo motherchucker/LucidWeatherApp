@@ -53,8 +53,22 @@ class HistoryTableViewController: UITableViewController {
         fetchForecast()
     }
 
+// Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ShowForecastViewController{
+            if segue.identifier == "showForecast"{
+                destination.date = self.date
+                destination.cityName = self.cityName
+                destination.temp = self.temp
+                destination.pressure = self.pressure
+                destination.humidity = self.humidity
+                destination.speed = self.speed
+                destination.descript = self.descript
+            }
+        }
+    }
+    
     // MARK: - Table view data source
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -83,9 +97,6 @@ class HistoryTableViewController: UITableViewController {
     
     // Display forecast for row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let showForecast = storyboard?.instantiateViewController(identifier: "ShowForecastViewController") as? ShowForecastViewController
-        
         let weather = self.savedWeather![indexPath.row]
         
         let formattedDate = DateFormatter()
@@ -93,20 +104,18 @@ class HistoryTableViewController: UITableViewController {
         formattedDate.timeStyle = .none
         formattedDate.locale = Locale(identifier: "hr")
         
-        showForecast?.date = formattedDate.string(from: weather.date!)
-        showForecast?.cityName = weather.cityName!
-        showForecast?.temp = weather.temp
-        showForecast?.pressure = Int(weather.pressure)
-        showForecast?.humidity = Int(weather.humidity)
-        showForecast?.speed = weather.windSpeed
-        showForecast?.descript = weather.weatherDescription!
+        self.date = formattedDate.string(from: weather.date!)
+        self.cityName = weather.cityName!
+        self.temp = weather.temp
+        self.pressure = Int(weather.pressure)
+        self.humidity = Int(weather.humidity)
+        self.speed = weather.windSpeed
+        self.descript = weather.weatherDescription!
+        print("Data set.")
         
-        self.navigationController?.pushViewController(showForecast!, animated: true)
-        
+        performSegue(withIdentifier: "showForecast", sender: self)
+      
         tableViewHistory.deselectRow(at: indexPath, animated: true)
-        
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
