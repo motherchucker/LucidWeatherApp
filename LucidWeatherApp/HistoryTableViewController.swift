@@ -41,8 +41,6 @@ class HistoryTableViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 self.tableViewHistory.reloadData()
-                // check
-                print("Data reloaded inside fetch")
             }
         }
         catch{
@@ -52,8 +50,6 @@ class HistoryTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // check
-        print("Data reloaded tab")
         fetchForecast()
     }
 
@@ -89,7 +85,6 @@ class HistoryTableViewController: UITableViewController {
     // Display forecast for row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //performSegue(withIdentifier: "showForecast", sender: self)
         let showForecast = storyboard?.instantiateViewController(identifier: "ShowForecastViewController") as? ShowForecastViewController
         
         let weather = self.savedWeather![indexPath.row]

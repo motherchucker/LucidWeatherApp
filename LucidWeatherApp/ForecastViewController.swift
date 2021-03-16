@@ -87,11 +87,9 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
 extension ForecastViewController : CLLocationManagerDelegate{
     func getLocation(){
         // Creating a CLLocationManager will automatically check authorization
-        DispatchQueue.main.async {
-            
-            self.locationManager = CLLocationManager()
-            self.locationManager.delegate = self
-        }
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -131,7 +129,7 @@ extension ForecastViewController : CLLocationManagerDelegate{
                 // assign placemark to locationCityName
                 locationCityName = placemark?.locality ?? "City Unknown"
             } else {
-                print("Error retrieving location. Error code: \(error?.localizedDescription)")
+                print("Error retrieving location.")
                 locationCityName = "Coludn't find location"
             }
             print("Location City: \(locationCityName)")
@@ -140,7 +138,7 @@ extension ForecastViewController : CLLocationManagerDelegate{
         }
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Deal with error
+        print("Error: \(error.localizedDescription). Failed to get device location.")
     }
 }
 
