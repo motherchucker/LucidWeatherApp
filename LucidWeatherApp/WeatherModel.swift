@@ -55,20 +55,22 @@ class WeatherDetail: ShowWeatherViewController{
                 print("Error: \(error)")
             }
             
-            do {
-                let result = try JSONDecoder().decode(Result.self, from: data!)
-                self.dateSaved = result.dt
-                self.name = result.name
-                self.temp = result.main.temp
-                self.pressure = Int(result.main.pressure.rounded())
-                self.humidity = Int(result.main.humidity.rounded())
-                self.speed = result.wind.speed
-                self .descript = result.weather[0].description
-                
-            } catch {
-                print("Json error")
+            if data != nil{
+                do {
+                    let result = try JSONDecoder().decode(Result.self, from: data!)
+                    self.dateSaved = result.dt
+                    self.name = result.name
+                    self.temp = result.main.temp
+                    self.pressure = Int(result.main.pressure.rounded())
+                    self.humidity = Int(result.main.humidity.rounded())
+                    self.speed = result.wind.speed
+                    self .descript = result.weather[0].description
+                    
+                } catch {
+                    print("Json error")
+                }
+                completed()
             }
-            completed()
         }
         dataTask.resume()
     }
