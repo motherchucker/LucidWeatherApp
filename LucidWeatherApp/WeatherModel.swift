@@ -28,7 +28,6 @@ class WeatherDetail: ShowWeatherViewController{
         var humidity : Double
     }
     
-    
     var dateSaved = 0.0
     var name = ""
     var temp = 0.0
@@ -36,8 +35,6 @@ class WeatherDetail: ShowWeatherViewController{
     var humidity = 0
     var speed = 0.0
     var descript = ""
-    
-    
     
     
     func getWeatherData(city: String, tempUnit: String, completed: @escaping()->()){
@@ -75,5 +72,4 @@ class WeatherDetail: ShowWeatherViewController{
         }
         dataTask.resume()
     }
-
 }

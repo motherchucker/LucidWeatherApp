@@ -18,14 +18,12 @@ class Cities {
 
 class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView: UITableView!
-    
     var citiesArray = [Cities]()
     var locationManager: CLLocationManager!
     var cityName = ""
     var clickedRow = false
 
-    
+    @IBOutlet var tableView: UITableView!
     @IBAction func btnGetLocation(_ sender: Any) {
         clickedRow = false
         getLocation()
@@ -50,18 +48,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-//  UITableViewDelegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        clickedRow = true
-        performSegue(withIdentifier: "showCity", sender: self)
-        
-        // Log - What is chosen:
-        print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].cityName!))")
-        
-    }
-    
+
 // Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShowWeatherViewController{
@@ -77,6 +64,15 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+//  UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        clickedRow = true
+        performSegue(withIdentifier: "showCity", sender: self)
+        // Log - What is chosen:
+        print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].cityName!))")
+    }
+    
 //  UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return citiesArray.count
@@ -90,7 +86,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     }
 }
 
-// location
+// Location
 extension ForecastViewController : CLLocationManagerDelegate{
     func getLocation(){
         // Creating a CLLocationManager will automatically check authorization

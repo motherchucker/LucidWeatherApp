@@ -17,15 +17,12 @@ class HistoryTableViewController: UITableViewController {
     var humidity = 0
     var speed = 0.0
     var descript = ""
-    
+    var savedWeather: [CityWeather]?
+    let context =  (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+   
     @IBOutlet var tableViewHistory: UITableView!
     
     
-    // Retrieve data from CoreData
-    let context =  (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    var savedWeather: [CityWeather]?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,8 +65,7 @@ class HistoryTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view data source
-
+// UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.savedWeather?.count ?? 0
@@ -95,7 +91,7 @@ class HistoryTableViewController: UITableViewController {
         return cell
     }
     
-    // Display forecast for row
+// UITableViewDelegate - Display forecast for row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let weather = self.savedWeather![indexPath.row]
         
@@ -118,6 +114,7 @@ class HistoryTableViewController: UITableViewController {
         tableViewHistory.deselectRow(at: indexPath, animated: true)
     }
     
+// Delete row
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
             // data to remove

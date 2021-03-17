@@ -11,15 +11,6 @@ import UIKit
 
 class ShowForecastViewController: UIViewController {
 
-    @IBOutlet weak var lblDate: UILabel!
-    @IBOutlet weak var lblCityName: UILabel!
-    @IBOutlet weak var lblTemp: UILabel!
-    @IBOutlet weak var lblPressure: UILabel!
-    @IBOutlet weak var lblHumidity: UILabel!
-    @IBOutlet weak var lblWindSpeed: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
-    
-    
     var date = ""
     var cityName = ""
     var temp = 0.0
@@ -28,6 +19,14 @@ class ShowForecastViewController: UIViewController {
     var speed = 0.0
     var descript = ""
     
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblCityName: UILabel!
+    @IBOutlet weak var lblTemp: UILabel!
+    @IBOutlet weak var lblPressure: UILabel!
+    @IBOutlet weak var lblHumidity: UILabel!
+    @IBOutlet weak var lblWindSpeed: UILabel!
+    @IBOutlet weak var lblDescription: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
