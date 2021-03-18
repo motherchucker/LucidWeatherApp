@@ -13,7 +13,6 @@ class ShowWeatherViewController: UIViewController {
     var cities : Cities?
     var city : String = ""
     var tempUnit: String = ""
-    var weatherDetail : WeatherDetail!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var lblCityName: UILabel!
