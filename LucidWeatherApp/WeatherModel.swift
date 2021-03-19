@@ -40,7 +40,7 @@ class WeatherDetail: ShowWeatherViewController{
     func getWeatherData(city: String, tempUnit: String, completed: @escaping()->()){
         
         
-        let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=00653d2fcf04771524e3d724d11805c3&units=\(tempUnit)")
+        let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=API_KEY_HERE&units=\(tempUnit)")
         
         guard url != nil else{
             print("Error while creating url object")
