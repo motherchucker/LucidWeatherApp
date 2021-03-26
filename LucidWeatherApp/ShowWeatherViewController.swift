@@ -9,111 +9,101 @@ import UIKit
 
 
 class ShowWeatherViewController: UIViewController {
+  
+  var city: City!
+  var metricSystem: MetricSystem = .metric
+  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+  private var weatherInfo: WeatherInfo?
+  
+  @IBOutlet weak var lblCityName: UILabel!
+  @IBOutlet weak var lblTemp: UILabel!
+  @IBOutlet weak var lblPressure: UILabel!
+  @IBOutlet weak var lblHumidity: UILabel!
+  @IBOutlet weak var lblWindSpeed: UILabel!
+  @IBOutlet weak var lblDescription: UILabel!
+  
+  
+  // MARK: - View lifecycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    var cities : Cities?
-    var city : String = ""
-    var tempUnit: String = ""
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    self.navigationItem.title = city.name.capitalFirstLetter()
     
-    @IBOutlet weak var lblCityName: UILabel!
-    @IBOutlet weak var lblTemp: UILabel!
-    @IBOutlet weak var lblPressure: UILabel!
-    @IBOutlet weak var lblHumidity: UILabel!
-    @IBOutlet weak var lblWindSpeed: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if cities?.cityName != nil{
-            city = String((cities?.cityName)!)
-        }
+    view.showActivityIndicator(true)
+    WeatherAPI.shared.getWeatherDataForCity(city, tempUnit: metricSystem) { (result: GetWeatherResult) in
+      self.view.showActivityIndicator(false)
+      switch result {
+      case .failure(let error):
+        debugPrint(error)
+      case .success(let weatherInfo):
+        self.weatherInfo = weatherInfo
+        self.populateWeatherData(weatherInfo)
+      }
+    }
+  }
+  
+  
+  // MARK: - IBActions
+  
+  @IBAction func weatherChangeSegment(_ sender: UISegmentedControl) {
+    if sender.selectedSegmentIndex == 0 {
+      metricSystem = .metric
+    } else {
+      metricSystem = .imperial
+    }
 
-        self.navigationItem.title = city.capitalFirstLetter()
-        tempUnit = "metric"
-        let weatherDetail = WeatherDetail()
-
-        weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
-            DispatchQueue.main.async {
-                self.lblCityName.text = "City: \(weatherDetail.name)"
-                self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
-                self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
-                self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
-                self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
-                self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
-            }
-        }
+    view.showActivityIndicator(true)
+    WeatherAPI.shared.getWeatherDataForCity(city, tempUnit: metricSystem) { (result: GetWeatherResult) in
+      self.view.showActivityIndicator(false)
+      switch result {
+      case .failure(let error):
+        debugPrint(error)
+      case .success(let weatherInfo):
+        self.weatherInfo = weatherInfo
+        self.populateWeatherData(weatherInfo)
+      }
+    }
+  }
+  
+  // Save data button
+  @IBAction func btnSaveData(_ sender: Any) {
+    //save
+    guard let weatherInfo = weatherInfo else {
+      let alert = UIAlertController(title: "Error", message: "Weather info missing!", preferredStyle: .alert)
+      let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+      alert.addAction(action)
+      present(alert, animated: true, completion: nil)
+      return
     }
     
-    
-    @IBAction func weatherChangeSegment(_ sender: UISegmentedControl){
-        
-        let weatherDetail = WeatherDetail()
-        
-        if sender.selectedSegmentIndex == 0{
-            weatherDetail.getWeatherData(city: city, tempUnit: "metric") {
-                DispatchQueue.main.async {
-                    self.lblCityName.text = "City: \(weatherDetail.name)"
-                    self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
-                    self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
-                    self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
-                    self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
-                    self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
-                }
-            }
-        }
-        else {
-            weatherDetail.getWeatherData(city: city, tempUnit: "imperial") {
-                DispatchQueue.main.async {
-                    self.lblCityName.text = "City: \(weatherDetail.name)"
-                    self.lblTemp.text = "Temperature: \(weatherDetail.temp)"
-                    self.lblPressure.text = "Pressure: \(weatherDetail.pressure)"
-                    self.lblHumidity.text = "Humidity: \(weatherDetail.humidity)"
-                    self.lblWindSpeed.text = "Wind speed: \(weatherDetail.speed)"
-                    self.lblDescription.text = "Weather today: \(weatherDetail.descript)"
-                }
-            }
-        }
+    let newCityData = CityWeather(context: context)
+    newCityData.date = NSDate(timeIntervalSince1970: weatherInfo.dateSaved) as Date
+    newCityData.cityName = weatherInfo.name
+    newCityData.temp = weatherInfo.temp
+    newCityData.pressure = Int64(weatherInfo.pressure)
+    newCityData.humidity = Int64(weatherInfo.humidity)
+    newCityData.windSpeed = weatherInfo.speed
+    newCityData.weatherDescription = weatherInfo.descript
+    do{
+      try self.context.save()
+      // check
+      print("Data saved")
     }
-    
-// Save data button
-    @IBAction func btnSaveData(_ sender: Any) {
-        //save
-        let weatherDetail = WeatherDetail()
-
-        weatherDetail.getWeatherData(city: city, tempUnit: tempUnit) {
-            DispatchQueue.main.async {
-                let newCityData = CityWeather(context: self.context)
-                newCityData.date = NSDate(timeIntervalSince1970: weatherDetail.dateSaved) as Date
-                newCityData.cityName = weatherDetail.name
-                newCityData.temp = weatherDetail.temp
-                newCityData.pressure = Int64(weatherDetail.pressure)
-                newCityData.humidity = Int64(weatherDetail.humidity)
-                newCityData.windSpeed = weatherDetail.speed
-                newCityData.weatherDescription = weatherDetail.descript
-                do{
-                    try self.context.save()
-                    // check
-                    print("Data saved")
-                }
-                catch{
-                    print("Error with saving data")
-                }
-            }
-        }
+    catch{
+      print("Error with saving data")
     }
+  }
+  
+  
+  // MARK: - Private methods
+  
+  private func populateWeatherData(_ weatherInfo: WeatherInfo) {
+    lblCityName.text = "City: \(weatherInfo.name)"
+    lblTemp.text = "Temperature: \(weatherInfo.temp)"
+    lblPressure.text = "Pressure: \(weatherInfo.pressure)"
+    lblHumidity.text = "Humidity: \(weatherInfo.humidity)"
+    lblWindSpeed.text = "Wind speed: \(weatherInfo.speed)"
+    lblDescription.text = "Weather today: \(weatherInfo.descript)"
+  }
 }
-
-extension String{
-    func capitalFirstLetter() -> String{
-        return prefix(1).capitalized + dropFirst()
-    }
-    
-    mutating func capitalizeFirstLetter(){
-        self = self.capitalFirstLetter()
-    }
-}
-
-
-

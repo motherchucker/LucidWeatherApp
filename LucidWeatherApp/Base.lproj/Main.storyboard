@@ -59,11 +59,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1l-LX-CCx">
-                                <rect key="frame" x="133.5" y="761" width="147" height="30"/>
+                                <rect key="frame" x="82" y="761" width="250" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="147" id="XAg-yR-t60"/>
+                                    <constraint firstAttribute="width" constant="250" id="XAg-yR-t60"/>
                                 </constraints>
-                                <state key="normal" title="Get location"/>
+                                <state key="normal" title="Show weather for current locaiton"/>
                                 <connections>
                                     <action selector="btnGetLocation:" destination="0mq-gn-fVq" eventType="touchUpInside" id="J4C-JP-AX8"/>
                                 </connections>
@@ -84,6 +84,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OzV-VD-oka"/>
                     <connections>
+                        <outlet property="showWeatherForCurrentLocationButton" destination="t1l-LX-CCx" id="ssi-mO-S8f"/>
                         <outlet property="tableView" destination="N9d-iL-clc" id="OmI-PN-DGN"/>
                         <segue destination="JKq-DY-vTz" kind="show" identifier="showCity" id="VQv-YI-8SN"/>
                     </connections>
