@@ -47,7 +47,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     showWeatherForCurrentLocationButton.isEnabled = false
   }
   
-  // Segue
+  // MARK: - Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let showWeatherViewController = segue.destination as? ShowWeatherViewController {
       showWeatherViewController.delegate = self
@@ -69,7 +69,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
-  //  UITableViewDelegate
+  //  MARK: - UITableViewDelegate
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     isUsingCurrentLocation = false
     performSegue(withIdentifier: "showCity", sender: self)
@@ -77,7 +77,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].name))")
   }
   
-  //  UITableViewDataSource
+  //  MARK: - UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return citiesArray.count
   }
@@ -90,7 +90,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   }
 }
 
-// Location
+// MARK: - CLLocationManagerDelegate
 extension ForecastViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     print("Checking authentication status.")
@@ -133,6 +133,9 @@ extension ForecastViewController: CLLocationManagerDelegate {
         locationCityName = "Coludn't find location"
       }
       print("Location City: \(locationCityName)")
+      
+      // For cities with two words in their name, for example: San Francisco
+      locationCityName = locationCityName.replacingOccurrences(of: " ", with: "+")
       
       let currentCity = City(name: locationCityName)
       self.currentCity = currentCity
