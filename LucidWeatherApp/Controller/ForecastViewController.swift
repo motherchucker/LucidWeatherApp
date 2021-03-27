@@ -20,7 +20,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   
   @IBAction func btnGetLocation(_ sender: Any) {
     isUsingCurrentLocation = true
-    self.performSegue(withIdentifier: "showCity", sender: self)
+    self.performSegue(withIdentifier: Constants.segueShowCity, sender: self)
   }
   
   override func viewDidLoad() {
@@ -51,7 +51,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let showWeatherViewController = segue.destination as? ShowWeatherViewController {
       showWeatherViewController.delegate = self
-      if segue.identifier == "showCity"{
+      if segue.identifier == Constants.segueShowCity{
         if
           let city = currentCity,
           isUsingCurrentLocation
@@ -69,10 +69,17 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
+  // MARK: - ShowWeatherViewControllerDelegate
+  
+  func showWeatherViewController(_ sender: ShowWeatherViewController, didChageMetricSystemTo metricSystem: MetricSystem) {
+    metricSystemLabel.isHidden = false
+    metricSystemLabel.text = metricSystem.rawValue
+  }
+  
   //  MARK: - UITableViewDelegate
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     isUsingCurrentLocation = false
-    performSegue(withIdentifier: "showCity", sender: self)
+    performSegue(withIdentifier: Constants.segueShowCity, sender: self)
     // Log - What is chosen:
     print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].name))")
   }
@@ -83,7 +90,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
     cell.textLabel?.text = citiesArray[indexPath.row].name.uppercased()
     
     return cell
@@ -147,15 +154,6 @@ extension ForecastViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Error: \(error.localizedDescription). Failed to get device location.")
   }
-  
-  
-  // MARK: - ShowWeatherViewControllerDelegate
-  
-  func showWeatherViewController(_ sender: ShowWeatherViewController, didChageMetricSystemTo metricSystem: MetricSystem) {
-    metricSystemLabel.isHidden = false
-    metricSystemLabel.text = metricSystem.rawValue
-  }
-  
 }
 
 

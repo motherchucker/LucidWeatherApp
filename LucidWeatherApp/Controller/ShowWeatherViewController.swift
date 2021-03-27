@@ -20,7 +20,7 @@ class ShowWeatherViewController: UIViewController {
 
   private var metricSystem: MetricSystem! {
     didSet {
-      UserDefaults.standard.setValue(metricSystem.rawValue, forKey: "kMetricSystem")
+      UserDefaults.standard.setValue(metricSystem.rawValue, forKey: Constants.kMetricSystem)
     }
   }
   
@@ -38,7 +38,7 @@ class ShowWeatherViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let savedMetricSystemString = UserDefaults.standard.value(forKey: "kMetricSystem") as? String {
+    if let savedMetricSystemString = UserDefaults.standard.value(forKey: Constants.kMetricSystem) as? String {
       metricSystem = MetricSystem(rawValue: savedMetricSystemString)
       
       if metricSystem! == .metric {
@@ -92,9 +92,7 @@ class ShowWeatherViewController: UIViewController {
     }
   }
   
-  // Save data button
   @IBAction func btnSaveData(_ sender: Any) {
-    //save
     guard let weatherInfo = weatherInfo else {
       let alert = UIAlertController(title: "Error", message: "Weather info missing!", preferredStyle: .alert)
       let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
