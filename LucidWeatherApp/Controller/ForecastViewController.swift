@@ -8,8 +8,7 @@
 import UIKit
 import CoreLocation
 
-class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  
+class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowWeatherViewControllerDelegate {
   var citiesArray = [City]()
   var locationManager: CLLocationManager!
   var isUsingCurrentLocation = false
@@ -17,6 +16,7 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   
   @IBOutlet var tableView: UITableView!
   @IBOutlet weak var showWeatherForCurrentLocationButton: UIButton!
+  @IBOutlet weak var metricSystemLabel: UILabel!
   
   @IBAction func btnGetLocation(_ sender: Any) {
     isUsingCurrentLocation = true
@@ -49,7 +49,8 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   
   // Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let showWeatherViewController = segue.destination as? ShowWeatherViewController{
+    if let showWeatherViewController = segue.destination as? ShowWeatherViewController {
+      showWeatherViewController.delegate = self
       if segue.identifier == "showCity"{
         if
           let city = currentCity,
@@ -143,6 +144,15 @@ extension ForecastViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Error: \(error.localizedDescription). Failed to get device location.")
   }
+  
+  
+  // MARK: - ShowWeatherViewControllerDelegate
+  
+  func showWeatherViewController(_ sender: ShowWeatherViewController, didChageMetricSystemTo metricSystem: MetricSystem) {
+    metricSystemLabel.isHidden = false
+    metricSystemLabel.text = metricSystem.rawValue
+  }
+  
 }
 
 
