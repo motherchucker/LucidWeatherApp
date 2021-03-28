@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum Constants {
+  static let cellIdentifier = "cell"
+  static let kMetricSystem = "kMetricSystem"
+  static let segueShowCity = "showCity"
+}
+
 enum MetricSystem: String {
   case metric = "metric"
   case imperial = "imperial"

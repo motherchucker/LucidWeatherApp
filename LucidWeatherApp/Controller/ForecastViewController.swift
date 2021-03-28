@@ -8,8 +8,7 @@
 import UIKit
 import CoreLocation
 
-class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  
+class ForecastViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ShowWeatherViewControllerDelegate {
   var citiesArray = [City]()
   var locationManager: CLLocationManager!
   var isUsingCurrentLocation = false
@@ -17,10 +16,11 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
   
   @IBOutlet var tableView: UITableView!
   @IBOutlet weak var showWeatherForCurrentLocationButton: UIButton!
+  @IBOutlet weak var metricSystemLabel: UILabel!
   
   @IBAction func btnGetLocation(_ sender: Any) {
     isUsingCurrentLocation = true
-    self.performSegue(withIdentifier: "showCity", sender: self)
+    self.performSegue(withIdentifier: Constants.segueShowCity, sender: self)
   }
   
   override func viewDidLoad() {
@@ -47,10 +47,11 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     showWeatherForCurrentLocationButton.isEnabled = false
   }
   
-  // Segue
+  // MARK: - Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let showWeatherViewController = segue.destination as? ShowWeatherViewController{
-      if segue.identifier == "showCity"{
+    if let showWeatherViewController = segue.destination as? ShowWeatherViewController {
+      showWeatherViewController.delegate = self
+      if segue.identifier == Constants.segueShowCity{
         if
           let city = currentCity,
           isUsingCurrentLocation
@@ -68,28 +69,35 @@ class ForecastViewController: UIViewController, UITableViewDelegate, UITableView
     }
   }
   
-  //  UITableViewDelegate
+  // MARK: - ShowWeatherViewControllerDelegate
+  
+  func showWeatherViewController(_ sender: ShowWeatherViewController, didChageMetricSystemTo metricSystem: MetricSystem) {
+    metricSystemLabel.isHidden = false
+    metricSystemLabel.text = metricSystem.rawValue
+  }
+  
+  //  MARK: - UITableViewDelegate
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     isUsingCurrentLocation = false
-    performSegue(withIdentifier: "showCity", sender: self)
+    performSegue(withIdentifier: Constants.segueShowCity, sender: self)
     // Log - What is chosen:
     print("You chose \(indexPath.row) with value \(String(citiesArray[indexPath.row].name))")
   }
   
-  //  UITableViewDataSource
+  //  MARK: - UITableViewDataSource
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return citiesArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
     cell.textLabel?.text = citiesArray[indexPath.row].name.uppercased()
     
     return cell
   }
 }
 
-// Location
+// MARK: - CLLocationManagerDelegate
 extension ForecastViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     print("Checking authentication status.")
@@ -132,6 +140,9 @@ extension ForecastViewController: CLLocationManagerDelegate {
         locationCityName = "Coludn't find location"
       }
       print("Location City: \(locationCityName)")
+      
+      // For cities with two words in their name, for example: San Francisco
+      locationCityName = locationCityName.replacingOccurrences(of: " ", with: "+")
       
       let currentCity = City(name: locationCityName)
       self.currentCity = currentCity
